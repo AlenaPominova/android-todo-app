@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.todoapp.db.DbHelper
 import com.example.todoapp.dialogs.DialogBuilder
 import com.example.todoapp.dialogs.DialogHelper
+import com.example.todoapp.dialogs.DialogUtil
 import com.example.todoapp.recycler.EndlessRecyclerViewScrollListener
 import com.example.todoapp.recycler.ListAdapter
 import java.util.*
@@ -22,6 +23,7 @@ class MainActivity : AppCompatActivity(), IMainActivity {
     private lateinit var listAdapter: ListAdapter
     private lateinit var dialogHelper: DialogHelper
     private lateinit var dialogBuilder: DialogBuilder
+    private lateinit var dialogUtil: DialogUtil
 
     private lateinit var listEmptyTextView: TextView
     private lateinit var scrollListener: EndlessRecyclerViewScrollListener
@@ -45,8 +47,10 @@ class MainActivity : AppCompatActivity(), IMainActivity {
         listAdapter = ListAdapter()
 
         val uiUpdater = UIUpdater(listAdapter, this)
+        dialogUtil = DialogUtil(dbHelper, uiUpdater)
         dialogHelper =
-            DialogHelper(progressBar, dbHelper, uiUpdater)
+            DialogHelper(dialogUtil, progressBar)
+//            DialogHelper(progressBar, dbHelper, uiUpdater)
 
         val linearLayoutManager = LinearLayoutManager(this)
         scrollListener = object : EndlessRecyclerViewScrollListener(linearLayoutManager) {
@@ -95,7 +99,7 @@ class MainActivity : AppCompatActivity(), IMainActivity {
                 runOnUiThread { listAdapter.notifyDataSetChanged() }
             }
             runOnUiThread(stopLoadMoreProgressBar)
-        }, 2000)
+        }, 0)
     }
 
     companion object {

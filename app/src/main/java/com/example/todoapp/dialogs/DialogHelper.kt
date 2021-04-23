@@ -6,6 +6,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.widget.doAfterTextChanged
+import com.example.todoapp.IUIUpdater
 import com.example.todoapp.UIUpdater
 import com.example.todoapp.db.IDbHelper
 import com.example.todoapp.db.ToDo
@@ -13,9 +14,10 @@ import java.util.*
 import kotlin.concurrent.timerTask
 
 class DialogHelper(
-    private val progressBar: ProgressBar,
-    private val dbHelper: IDbHelper,
-    private val uiUpdater: UIUpdater
+    private val dialogUtil: DialogUtil,
+    private val progressBar: ProgressBar
+//    private val dbHelper: IDbHelper,
+//    private val uiUpdater: IUIUpdater
 ) {
     private val stopProgressBar = Runnable { progressBar.visibility = ProgressBar.GONE }
 
@@ -31,13 +33,14 @@ class DialogHelper(
             progressBar.visibility = ProgressBar.VISIBLE
             Timer().schedule(timerTask {
                 try {
-                    exceptionTextView.text = ""
-
-                    dbHelper.add(todo)
-                    uiUpdater.addToDo(todo)
-                    uiUpdater.runOnUiThread(stopProgressBar)
-
-                    //Dismiss once everything is OK.
+                    dialogUtil.saveAction(exceptionTextView, todo, stopProgressBar)
+//                    exceptionTextView.text = ""
+//
+//                    dbHelper.add(todo)
+//                    uiUpdater.addToDo(todo)
+//                    uiUpdater.runOnUiThread(stopProgressBar)
+//
+//                    //Dismiss once everything is OK.
                     dialog.dismiss()
                 } catch (e: Exception) {
                     exceptionTextView.text = e.message
@@ -58,13 +61,14 @@ class DialogHelper(
             progressBar.visibility = ProgressBar.VISIBLE
             Timer().schedule(timerTask {
                 try {
-                    exceptionTextView.text = ""
-
-                    dbHelper.update(originalTask)
-                    uiUpdater.updateToDo(originalTask)
-                    uiUpdater.runOnUiThread(stopProgressBar)
-
-                    //Dismiss once everything is OK.
+                    dialogUtil.editAction(exceptionTextView, originalTask, stopProgressBar)
+//                    exceptionTextView.text = ""
+//
+//                    dbHelper.update(originalTask)
+//                    uiUpdater.updateToDo(originalTask)
+//                    uiUpdater.runOnUiThread(stopProgressBar)
+//
+//                    //Dismiss once everything is OK.
                     dialog.dismiss()
                 } catch (e: Exception) {
                     exceptionTextView.text = e.message
@@ -79,11 +83,12 @@ class DialogHelper(
             progressBar.visibility = ProgressBar.VISIBLE
             Timer().schedule(timerTask {
                 try {
-                    dbHelper.delete(task)
-                    uiUpdater.removeToDo(task)
-                    uiUpdater.runOnUiThread(stopProgressBar)
-
-                    //Dismiss once everything is OK.
+                    dialogUtil.deleteAction(task, stopProgressBar)
+//                    dbHelper.delete(task)
+//                    uiUpdater.removeToDo(task)
+//                    uiUpdater.runOnUiThread(stopProgressBar)
+//
+//                    //Dismiss once everything is OK.
                     dialog.dismiss()
                 } catch (e: Exception) {
                     //ignore

@@ -7,7 +7,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.todoapp.R
 import com.example.todoapp.db.ToDo
 
-class ListAdapter: RecyclerView.Adapter<ViewHolder>() {
+interface IListAdapter {
+    fun add(todoList: ArrayList<ToDo>)
+    fun addFirst(todo: ToDo)
+    fun remove(id: Int): Int
+    fun update(todo: ToDo): Int
+    fun clear()
+    fun notifyItemInserted(position: Int)
+    fun notifyItemRemoved(position: Int)
+}
+
+class ListAdapter: RecyclerView.Adapter<ViewHolder>(), IListAdapter {
 
     private val list = ArrayList<ToDo>()
 
@@ -23,22 +33,22 @@ class ListAdapter: RecyclerView.Adapter<ViewHolder>() {
 
     override fun getItemCount(): Int = list.size
 
-    fun add(todoList: ArrayList<ToDo>) {
+    override fun add(todoList: ArrayList<ToDo>) {
         list.addAll(todoList)
     }
 
-    fun addFirst(todo: ToDo) {
+    override fun addFirst(todo: ToDo) {
         list.add(0, todo)
     }
 
-    fun remove(id: Int): Int {
+    override fun remove(id: Int): Int {
         val el = list.first { o -> o.id == id }
         val index = list.indexOf(el)
         list.remove(el)
         return index
     }
 
-    fun update(todo: ToDo): Int {
+    override fun update(todo: ToDo): Int {
         val el = list.first { o -> o.id == todo.id }
         val index = list.indexOf(el)
         el.task = todo.task
@@ -47,7 +57,7 @@ class ListAdapter: RecyclerView.Adapter<ViewHolder>() {
         return  index
     }
 
-    fun clear() {
+    override fun clear() {
         list.clear()
     }
 }
