@@ -12,7 +12,7 @@ import com.example.todoapp.dialogs.DialogBuilder
 import com.example.todoapp.dialogs.DialogHelper
 import com.example.todoapp.dialogs.DialogUtil
 import com.example.todoapp.recycler.EndlessRecyclerViewScrollListener
-import com.example.todoapp.recycler.ListAdapter
+import com.example.todoapp.recycler.TaskListAdapter
 import java.util.*
 import kotlin.concurrent.timerTask
 
@@ -20,7 +20,7 @@ import kotlin.concurrent.timerTask
 class MainActivity : AppCompatActivity(), IMainActivity {
 
     private lateinit var dbHelper: DbHelper
-    private lateinit var listAdapter: ListAdapter
+    private lateinit var taskListAdapter: TaskListAdapter
     private lateinit var dialogHelper: DialogHelper
     private lateinit var dialogBuilder: DialogBuilder
     private lateinit var dialogUtil: DialogUtil
@@ -44,9 +44,9 @@ class MainActivity : AppCompatActivity(), IMainActivity {
 
         dbHelper = DbHelper(this)
 
-        listAdapter = ListAdapter()
+        taskListAdapter = TaskListAdapter()
 
-        val uiUpdater = UIUpdater(listAdapter, this)
+        val uiUpdater = UIUpdater(taskListAdapter, this)
         dialogUtil = DialogUtil(dbHelper, uiUpdater)
         dialogHelper =
             DialogHelper(dialogUtil, progressBar)
@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity(), IMainActivity {
         }
         recyclerView.apply {
             layoutManager = linearLayoutManager
-            adapter = listAdapter
+            adapter = taskListAdapter
         }
 
         dialogBuilder = DialogBuilder(dialogHelper)
@@ -95,8 +95,8 @@ class MainActivity : AppCompatActivity(), IMainActivity {
         Timer().schedule(timerTask {
             val taskList = dbHelper.loadPage((offset) * PAGE_SIZE, PAGE_SIZE)
             if (taskList.size > 0) {
-                listAdapter.add(taskList)
-                runOnUiThread { listAdapter.notifyDataSetChanged() }
+                taskListAdapter.add(taskList)
+                runOnUiThread { taskListAdapter.notifyDataSetChanged() }
             }
             runOnUiThread(stopLoadMoreProgressBar)
         }, 0)
