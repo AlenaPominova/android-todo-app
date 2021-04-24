@@ -138,6 +138,6 @@ class ListAdapterTest {
         val actual = listAdapter.getAllTasks()
 
         assertNotNull(actual)
-        assert(!actual.isEmpty())
+        assert(actual.isEmpty())
     }
 }
