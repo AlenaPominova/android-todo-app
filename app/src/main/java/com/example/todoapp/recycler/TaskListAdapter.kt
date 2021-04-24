@@ -17,7 +17,7 @@ interface IListAdapter {
     fun notifyItemRemoved(position: Int)
 }
 
-class ListAdapter: RecyclerView.Adapter<ViewHolder>(), IListAdapter {
+class TaskListAdapter: RecyclerView.Adapter<ViewHolder>(), IListAdapter {
 
     private val list = ArrayList<ToDo>()
 

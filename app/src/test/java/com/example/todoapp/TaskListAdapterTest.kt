@@ -1,7 +1,7 @@
 package com.example.todoapp
 
 import com.example.todoapp.db.ToDo
-import com.example.todoapp.recycler.ListAdapter
+import com.example.todoapp.recycler.TaskListAdapter
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Test
@@ -9,11 +9,11 @@ import org.junit.runner.RunWith
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class ListAdapterTest {
+class TaskListAdapterTest {
 
     @Test
     fun checkAddElement() {
-        val listAdapter = ListAdapter()
+        val listAdapter = TaskListAdapter()
 
         val expectedTodo = ToDo(1, "First tsk to add")
         listAdapter.addFirst(expectedTodo)
@@ -25,7 +25,7 @@ class ListAdapterTest {
 
     @Test
     fun checkAddNewElementFirst() {
-        val listAdapter = ListAdapter()
+        val listAdapter = TaskListAdapter()
 
         val expectedTodo = ToDo(1, "First tsk to add")
         val secondTodo = ToDo(1, "Second tsk to add")
@@ -39,7 +39,7 @@ class ListAdapterTest {
 
     @Test
     fun checkAddAll() {
-        val listAdapter = ListAdapter()
+        val listAdapter = TaskListAdapter()
 
         val firstTodo = ToDo(1, "First tsk to add")
         val secondTodo = ToDo(1, "Second tsk to add")
@@ -57,7 +57,7 @@ class ListAdapterTest {
 
     @Test
     fun checkRemoveElementByIndex() {
-        val listAdapter = ListAdapter()
+        val listAdapter = TaskListAdapter()
 
         val firstTodo = ToDo(1, "First tsk to add")
         val secondTodo = ToDo(2, "Second tsk to add")
@@ -78,7 +78,7 @@ class ListAdapterTest {
 
     @Test
     fun checkUpdatedElementIsOnTop() {
-        val listAdapter = ListAdapter()
+        val listAdapter = TaskListAdapter()
 
         val firstTodo = ToDo(1, "First tsk to add")
         val secondTodo = ToDo(2, "Second tsk to add")
@@ -100,7 +100,7 @@ class ListAdapterTest {
 
     @Test
     fun checkListSizeDoesntCHangeAFterUpdateElement() {
-        val listAdapter = ListAdapter()
+        val listAdapter = TaskListAdapter()
 
         val firstTodo = ToDo(1, "First tsk to add")
         val secondTodo = ToDo(2, "Second tsk to add")
@@ -122,7 +122,7 @@ class ListAdapterTest {
 
     @Test
     fun checkCLearTaskList() {
-        val listAdapter = ListAdapter()
+        val listAdapter = TaskListAdapter()
 
         val firstTodo = ToDo(1, "First tsk to add")
         val secondTodo = ToDo(2, "Second tsk to add")
