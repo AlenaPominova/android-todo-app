@@ -2,7 +2,6 @@ package com.example.todoapp
 
 import com.example.todoapp.db.ToDo
 import com.example.todoapp.recycler.IListAdapter
-import com.example.todoapp.recycler.ListAdapter
 
 interface IUIUpdater {
     fun runOnUiThread(action: Runnable)
@@ -11,42 +10,42 @@ interface IUIUpdater {
     fun updateToDo(todo: ToDo)
 }
 
-class UIUpdater(private val listAdapter: IListAdapter, private val mainActivity: IMainActivity) :
+class UIUpdater(private val taskListAdapter: IListAdapter, private val mainActivity: IMainActivity) :
     IUIUpdater {
     override fun runOnUiThread(action: Runnable){
         mainActivity.runOnUiThread(action)
     }
 
     override fun addToDo(todo: ToDo) {
-        listAdapter.addFirst(todo)
+        taskListAdapter.addFirst(todo)
         mainActivity.runOnUiThread(
             Runnable {
-                listAdapter.notifyItemInserted(0)
+                taskListAdapter.notifyItemInserted(0)
             }
         )
     }
 
     override fun removeToDo(id: Int) {
-        val index = listAdapter.remove(id)
+        val index = taskListAdapter.remove(id)
         mainActivity.runOnUiThread(
             Runnable {
-                listAdapter.notifyItemRemoved(index)
+                taskListAdapter.notifyItemRemoved(index)
             }
         )
     }
 
     override fun updateToDo(todo: ToDo) {
-        val index = listAdapter.remove(todo.id)
+        val index = taskListAdapter.remove(todo.id)
         mainActivity.runOnUiThread(
             Runnable {
-                listAdapter.notifyItemRemoved(index)
+                taskListAdapter.notifyItemRemoved(index)
             }
         )
 
-        listAdapter.addFirst(todo)
+        taskListAdapter.addFirst(todo)
         mainActivity.runOnUiThread(
             Runnable {
-                listAdapter.notifyItemInserted(0)
+                taskListAdapter.notifyItemInserted(0)
             }
         )
     }

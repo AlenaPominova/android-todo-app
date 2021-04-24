@@ -1,6 +1,5 @@
 package com.example.todoapp.dialogs
 
-import android.widget.TextView
 import com.example.todoapp.IUIUpdater
 import com.example.todoapp.db.IDbHelper
 import com.example.todoapp.db.ToDo
@@ -16,8 +15,7 @@ class DialogUtil(
         uiUpdater.runOnUiThread(stopProgressBar)
     }
 
-    fun editAction(originalTask: ToDo, stopProgressBar: Runnable
-    ) {
+    fun editAction(originalTask: ToDo, stopProgressBar: Runnable) {
         dbHelper.update(originalTask)
         uiUpdater.updateToDo(originalTask)
         uiUpdater.runOnUiThread(stopProgressBar)

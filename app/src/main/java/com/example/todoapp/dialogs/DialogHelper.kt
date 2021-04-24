@@ -16,8 +16,6 @@ import kotlin.concurrent.timerTask
 class DialogHelper(
     private val dialogUtil: DialogUtil,
     private val progressBar: ProgressBar
-//    private val dbHelper: IDbHelper,
-//    private val uiUpdater: IUIUpdater
 ) {
     private val stopProgressBar = Runnable { progressBar.visibility = ProgressBar.GONE }
 
@@ -36,11 +34,6 @@ class DialogHelper(
                     exceptionTextView.text = ""
 
                     dialogUtil.saveAction(todo, stopProgressBar)
-//                    dbHelper.add(todo)
-//                    uiUpdater.addToDo(todo)
-//                    uiUpdater.runOnUiThread(stopProgressBar)
-//
-//                    //Dismiss once everything is OK.
                     dialog.dismiss()
                 } catch (e: Exception) {
                     exceptionTextView.text = e.message
@@ -64,11 +57,6 @@ class DialogHelper(
                     exceptionTextView.text = ""
 
                     dialogUtil.editAction(originalTask, stopProgressBar)
-//                    dbHelper.update(originalTask)
-//                    uiUpdater.updateToDo(originalTask)
-//                    uiUpdater.runOnUiThread(stopProgressBar)
-//
-//                    //Dismiss once everything is OK.
                     dialog.dismiss()
                 } catch (e: Exception) {
                     exceptionTextView.text = e.message
@@ -84,11 +72,7 @@ class DialogHelper(
             Timer().schedule(timerTask {
                 try {
                     dialogUtil.deleteAction(task, stopProgressBar)
-//                    dbHelper.delete(task)
-//                    uiUpdater.removeToDo(task)
-//                    uiUpdater.runOnUiThread(stopProgressBar)
-//
-//                    //Dismiss once everything is OK.
+
                     dialog.dismiss()
                 } catch (e: Exception) {
                     //ignore
