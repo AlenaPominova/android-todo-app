@@ -12,12 +12,6 @@ import org.mockito.Mock
 import org.mockito.Mockito.*
 import org.mockito.junit.MockitoJUnitRunner
 
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
-
 @RunWith(MockitoJUnitRunner::class)
 public class DialogUtilTest {
 

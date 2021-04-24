@@ -10,9 +10,13 @@ interface IUIUpdater {
     fun updateToDo(todo: ToDo)
 }
 
-class UIUpdater(private val taskListAdapter: IListAdapter, private val mainActivity: IMainActivity) :
+class UIUpdater(
+    private val taskListAdapter: IListAdapter,
+    private val mainActivity: IMainActivity
+) :
+
     IUIUpdater {
-    override fun runOnUiThread(action: Runnable){
+    override fun runOnUiThread(action: Runnable) {
         mainActivity.runOnUiThread(action)
     }
 

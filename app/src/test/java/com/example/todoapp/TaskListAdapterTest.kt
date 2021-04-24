@@ -20,6 +20,7 @@ class TaskListAdapterTest {
         val actual = listAdapter.getAllTasks()
 
         assertNotNull(actual)
+        assert(!actual.isEmpty())
         assertEquals(expectedTodo, actual.get(0))
     }
 
@@ -61,11 +62,11 @@ class TaskListAdapterTest {
 
         val firstTodo = ToDo(1, "First tsk to add")
         val secondTodo = ToDo(2, "Second tsk to add")
-        val expected = ToDo(3, "Expected tsk to add")
+        val expectedTodo = ToDo(3, "Expected tsk to add")
 
         val taskList = ArrayList<ToDo>()
         taskList.add(firstTodo)
-        taskList.add(expected)
+        taskList.add(expectedTodo)
         taskList.add(secondTodo)
 
         listAdapter.add(taskList)
@@ -73,7 +74,7 @@ class TaskListAdapterTest {
         val actual = listAdapter.getAllTasks()
 
         assertNotNull(actual)
-        assertEquals(expected, actual.get(0))
+        assertEquals(expectedTodo, actual.get(0))
     }
 
     @Test
@@ -83,7 +84,7 @@ class TaskListAdapterTest {
         val firstTodo = ToDo(1, "First tsk to add")
         val secondTodo = ToDo(2, "Second tsk to add")
         val thirdTodo = ToDo(3, "thirdTodo tsk to add")
-        val expected = ToDo(2, "Second updated tsk")
+        val expectedTodo = ToDo(2, "Second updated tsk")
 
         val taskList = ArrayList<ToDo>()
         taskList.add(firstTodo)
@@ -91,15 +92,15 @@ class TaskListAdapterTest {
         taskList.add(thirdTodo)
 
         listAdapter.add(taskList)
-        listAdapter.update(expected)
+        listAdapter.update(expectedTodo)
         val actual = listAdapter.getAllTasks()
 
         assertNotNull(actual)
-        assertEquals(expected, actual.get(0))
+        assertEquals(expectedTodo, actual.get(0))
     }
 
     @Test
-    fun checkListSizeDoesntCHangeAFterUpdateElement() {
+    fun checkListSizeDoesntChangeAfterUpdateElement() {
         val listAdapter = TaskListAdapter()
 
         val firstTodo = ToDo(1, "First tsk to add")
@@ -138,6 +139,6 @@ class TaskListAdapterTest {
         val actual = listAdapter.getAllTasks()
 
         assertNotNull(actual)
-        assert(actual.isEmpty())
+        assert(!actual.isEmpty())
     }
 }

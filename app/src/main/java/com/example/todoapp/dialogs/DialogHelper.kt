@@ -42,12 +42,8 @@ class DialogHelper(
         }
     }
 
-    fun editDialogAction(
-        dialog: AlertDialog,
-        taskEditText: EditText,
-        exceptionTextView: TextView,
-        originalTask: ToDo
-    ) {
+    fun editDialogAction(dialog: AlertDialog, taskEditText: EditText,
+                         exceptionTextView: TextView, originalTask: ToDo) {
         val button: Button = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
         button.setOnClickListener {
             originalTask.task = taskEditText.text.toString()
@@ -72,7 +68,6 @@ class DialogHelper(
             Timer().schedule(timerTask {
                 try {
                     dialogUtil.deleteAction(task, stopProgressBar)
-
                     dialog.dismiss()
                 } catch (e: Exception) {
                     //ignore

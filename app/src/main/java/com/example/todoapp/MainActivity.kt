@@ -50,7 +50,6 @@ class MainActivity : AppCompatActivity(), IMainActivity {
         dialogUtil = DialogUtil(dbHelper, uiUpdater)
         dialogHelper =
             DialogHelper(dialogUtil, progressBar)
-//            DialogHelper(progressBar, dbHelper, uiUpdater)
 
         val linearLayoutManager = LinearLayoutManager(this)
         scrollListener = object : EndlessRecyclerViewScrollListener(linearLayoutManager) {
@@ -64,7 +63,6 @@ class MainActivity : AppCompatActivity(), IMainActivity {
         }
 
         dialogBuilder = DialogBuilder(dialogHelper)
-
         progressBar.visibility = ProgressBar.GONE
         loadMoreProgressBar.visibility = ProgressBar.VISIBLE
 
