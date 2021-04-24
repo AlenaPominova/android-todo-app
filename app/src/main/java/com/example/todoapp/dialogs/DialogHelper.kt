@@ -33,9 +33,9 @@ class DialogHelper(
             progressBar.visibility = ProgressBar.VISIBLE
             Timer().schedule(timerTask {
                 try {
-                    dialogUtil.saveAction(exceptionTextView, todo, stopProgressBar)
-//                    exceptionTextView.text = ""
-//
+                    exceptionTextView.text = ""
+
+                    dialogUtil.saveAction(todo, stopProgressBar)
 //                    dbHelper.add(todo)
 //                    uiUpdater.addToDo(todo)
 //                    uiUpdater.runOnUiThread(stopProgressBar)
@@ -61,9 +61,9 @@ class DialogHelper(
             progressBar.visibility = ProgressBar.VISIBLE
             Timer().schedule(timerTask {
                 try {
-                    dialogUtil.editAction(exceptionTextView, originalTask, stopProgressBar)
-//                    exceptionTextView.text = ""
-//
+                    exceptionTextView.text = ""
+
+                    dialogUtil.editAction(originalTask, stopProgressBar)
 //                    dbHelper.update(originalTask)
 //                    uiUpdater.updateToDo(originalTask)
 //                    uiUpdater.runOnUiThread(stopProgressBar)

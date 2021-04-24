@@ -60,6 +60,10 @@ class ListAdapter: RecyclerView.Adapter<ViewHolder>(), IListAdapter {
     override fun clear() {
         list.clear()
     }
+
+    fun getAllTasks(): ArrayList<ToDo> {
+        return list
+    }
 }
 
 class ViewHolder(inflater: LayoutInflater, parent: ViewGroup) :

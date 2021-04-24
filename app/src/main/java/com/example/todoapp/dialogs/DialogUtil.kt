@@ -10,20 +10,14 @@ class DialogUtil(
     private val uiUpdater: IUIUpdater
 ) {
 
-    fun saveAction(exceptionTextView: TextView,
-                   todo: ToDo, stopProgressBar: Runnable) {
-        exceptionTextView.text = ""
-
+    fun saveAction(todo: ToDo, stopProgressBar: Runnable) {
         dbHelper.add(todo)
         uiUpdater.addToDo(todo)
         uiUpdater.runOnUiThread(stopProgressBar)
     }
 
-    fun editAction(exceptionTextView: TextView,
-                   originalTask: ToDo, stopProgressBar: Runnable
+    fun editAction(originalTask: ToDo, stopProgressBar: Runnable
     ) {
-        exceptionTextView.text = ""
-
         dbHelper.update(originalTask)
         uiUpdater.updateToDo(originalTask)
         uiUpdater.runOnUiThread(stopProgressBar)
